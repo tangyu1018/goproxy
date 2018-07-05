@@ -1,0 +1,8 @@
+http
+-ttcp
+-p:1081
+-Ttcp
+-P127.0.0.1:1080
+-Bbaned
+-bblocked
+-ddirect
