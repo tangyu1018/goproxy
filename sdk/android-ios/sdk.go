@@ -9,15 +9,15 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/snail007/goproxy/services"
-	httpx "github.com/snail007/goproxy/services/http"
-	"github.com/snail007/goproxy/services/kcpcfg"
-	mux "github.com/snail007/goproxy/services/mux"
-	socksx "github.com/snail007/goproxy/services/socks"
-	spsx "github.com/snail007/goproxy/services/sps"
-	tcpx "github.com/snail007/goproxy/services/tcp"
-	tunnel "github.com/snail007/goproxy/services/tunnel"
-	udpx "github.com/snail007/goproxy/services/udp"
+	"github.com/tangyu1018/goproxy/services"
+	httpx "github.com/tangyu1018/goproxy/services/http"
+	"github.com/tangyu1018/goproxy/services/kcpcfg"
+	mux "github.com/tangyu1018/goproxy/services/mux"
+	socksx "github.com/tangyu1018/goproxy/services/socks"
+	spsx "github.com/tangyu1018/goproxy/services/sps"
+	tcpx "github.com/tangyu1018/goproxy/services/tcp"
+	tunnel "github.com/tangyu1018/goproxy/services/tunnel"
+	udpx "github.com/tangyu1018/goproxy/services/udp"
 	kcp "github.com/xtaci/kcp-go"
 	"golang.org/x/crypto/pbkdf2"
 	kingpin "gopkg.in/alecthomas/kingpin.v2"
@@ -289,7 +289,7 @@ func Start(serviceID, serviceArgsStr string) (errStr string) {
 	case "fast3":
 		*kcpArgs.NoDelay, *kcpArgs.Interval, *kcpArgs.Resend, *kcpArgs.NoCongestion = 1, 10, 2, 1
 	}
-	pass := pbkdf2.Key([]byte(*kcpArgs.Key), []byte("snail007-goproxy"), 4096, 32, sha1.New)
+	pass := pbkdf2.Key([]byte(*kcpArgs.Key), []byte("tangyu1018-goproxy"), 4096, 32, sha1.New)
 
 	switch *kcpArgs.Crypt {
 	case "sm4":

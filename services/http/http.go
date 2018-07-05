@@ -11,10 +11,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/snail007/goproxy/services"
-	"github.com/snail007/goproxy/services/kcpcfg"
-	"github.com/snail007/goproxy/utils"
-	"github.com/snail007/goproxy/utils/conncrypt"
+	"github.com/tangyu1018/goproxy/services"
+	"github.com/tangyu1018/goproxy/services/kcpcfg"
+	"github.com/tangyu1018/goproxy/utils"
+	"github.com/tangyu1018/goproxy/utils/conncrypt"
 
 	"golang.org/x/crypto/ssh"
 )
@@ -33,6 +33,7 @@ type HTTPArgs struct {
 	Interval            *int
 	Blocked             *string
 	Direct              *string
+	Baned               *string
 	AuthFile            *string
 	Auth                *[]string
 	AuthURL             *string
@@ -138,7 +139,7 @@ func (s *HTTP) CheckArgs() (err error) {
 func (s *HTTP) InitService() (err error) {
 	s.InitBasicAuth()
 	if *s.cfg.Parent != "" {
-		s.checker = utils.NewChecker(*s.cfg.HTTPTimeout, int64(*s.cfg.Interval), *s.cfg.Blocked, *s.cfg.Direct, s.log)
+		s.checker = utils.NewChecker(*s.cfg.HTTPTimeout, int64(*s.cfg.Interval), *s.cfg.Blocked, *s.cfg.Direct, *s.cfg.Baned, s.log)
 	}
 	if *s.cfg.DNSAddress != "" {
 		(*s).domainResolver = utils.NewDomainResolver(*s.cfg.DNSAddress, *s.cfg.DNSTTL, s.log)
@@ -270,32 +271,41 @@ func (s *HTTP) callback(inConn net.Conn) {
 	address := req.Host
 	host, _, _ := net.SplitHostPort(address)
 	useProxy := false
-	if !utils.IsIternalIP(host, *s.cfg.Always) {
-		useProxy = true
-		if *s.cfg.Parent == "" {
-			useProxy = false
-		} else if *s.cfg.Always {
-			useProxy = true
-		} else {
-			k := s.Resolve(address)
-			s.checker.Add(address, k)
-			//var n, m uint
-			useProxy, _, _ = s.checker.IsBlocked(k)
-			//s.log.Printf("blocked ? : %v, %s , fail:%d ,success:%d", useProxy, address, n, m)
-		}
-	}
+	isBaned := false
+	ks := s.Resolve(address)
+	isBaned = s.checker.IsBaned(ks)
 
-	s.log.Printf("use proxy : %v, %s", useProxy, address)
-
-	err = s.OutToTCP(useProxy, address, &inConn, &req)
-	if err != nil {
-		if *s.cfg.Parent == "" {
-			s.log.Printf("connect to %s fail, ERR:%s", address, err)
-		} else {
-			s.log.Printf("connect to %s parent %s fail", *s.cfg.ParentType, *s.cfg.Parent)
-		}
+	if isBaned {
 		utils.CloseConn(&inConn)
+	} else {
+		if !utils.IsIternalIP(host, *s.cfg.Always) {
+			useProxy = true
+			if *s.cfg.Parent == "" {
+				useProxy = false
+			} else if *s.cfg.Always {
+				useProxy = true
+			} else {
+				k := s.Resolve(address)
+				s.checker.Add(address, k)
+				//var n, m uint
+				useProxy, _, _ = s.checker.IsBlocked(k)
+				//s.log.Printf("blocked ? : %v, %s , fail:%d ,success:%d", useProxy, address, n, m)
+			}
+		}
+
+		s.log.Printf("use proxy : %v, %s", useProxy, address)
+
+		err = s.OutToTCP(useProxy, address, &inConn, &req)
+		if err != nil {
+			if *s.cfg.Parent == "" {
+				s.log.Printf("connect to %s fail, ERR:%s", address, err)
+			} else {
+				s.log.Printf("connect to %s parent %s fail", *s.cfg.ParentType, *s.cfg.Parent)
+			}
+			utils.CloseConn(&inConn)
+		}
 	}
+
 }
 func (s *HTTP) OutToTCP(useProxy bool, address string, inConn *net.Conn, req *utils.HTTPRequest) (err interface{}) {
 	inAddr := (*inConn).RemoteAddr().String()

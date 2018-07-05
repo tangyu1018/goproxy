@@ -10,12 +10,12 @@ import (
 	"strings"
 	"time"
 
-	"github.com/snail007/goproxy/services"
-	"github.com/snail007/goproxy/services/kcpcfg"
-	"github.com/snail007/goproxy/utils"
-	"github.com/snail007/goproxy/utils/aes"
-	"github.com/snail007/goproxy/utils/conncrypt"
-	"github.com/snail007/goproxy/utils/socks"
+	"github.com/tangyu1018/goproxy/services"
+	"github.com/tangyu1018/goproxy/services/kcpcfg"
+	"github.com/tangyu1018/goproxy/utils"
+	"github.com/tangyu1018/goproxy/utils/aes"
+	"github.com/tangyu1018/goproxy/utils/conncrypt"
+	"github.com/tangyu1018/goproxy/utils/socks"
 	"golang.org/x/crypto/ssh"
 )
 
@@ -41,6 +41,7 @@ type SocksArgs struct {
 	Interval       *int
 	Blocked        *string
 	Direct         *string
+	Baned          *string
 	AuthFile       *string
 	Auth           *[]string
 	AuthURL        *string
@@ -152,7 +153,7 @@ func (s *Socks) InitService() (err error) {
 	if *s.cfg.DNSAddress != "" {
 		(*s).domainResolver = utils.NewDomainResolver(*s.cfg.DNSAddress, *s.cfg.DNSTTL, s.log)
 	}
-	s.checker = utils.NewChecker(*s.cfg.Timeout, int64(*s.cfg.Interval), *s.cfg.Blocked, *s.cfg.Direct, s.log)
+	s.checker = utils.NewChecker(*s.cfg.Timeout, int64(*s.cfg.Interval), *s.cfg.Blocked, *s.cfg.Direct, *s.cfg.Baned, s.log)
 	if *s.cfg.ParentType == "ssh" {
 		e := s.ConnectSSH()
 		if e != nil {

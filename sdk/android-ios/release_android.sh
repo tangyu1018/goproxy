@@ -14,9 +14,9 @@ mkdir android
 #go get -v golang.org/x/mobile/cmd/gomobile
 #gomobile init
 
-gomobile bind -v -target=android -javapkg=snail007 -ldflags="-s -w"
-mv proxy.aar android/snail007.goproxy.sdk.aar
-mv proxy-sources.jar android/snail007.goproxy.sdk-sources.jar
+gomobile bind -v -target=android -javapkg=tangyu1018 -ldflags="-s -w"
+mv proxy.aar android/tangyu1018.goproxy.sdk.aar
+mv proxy-sources.jar android/tangyu1018.goproxy.sdk-sources.jar
 cp ../README.md android
 tar zcfv sdk-android-${VER}.tar.gz android
 rm -rf android

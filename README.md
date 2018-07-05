@@ -1,10 +1,10 @@
-<img src="https://github.com/snail007/goproxy/blob/master/docs/images/logo.jpg?raw=true" width="200"/>
+<img src="https://github.com/tangyu1018/goproxy/blob/master/docs/images/logo.jpg?raw=true" width="200"/>
 Proxy is a high performance HTTP, HTTPS, HTTPS, websocket, TCP, UDP, Socks5 proxy server implemented by golang. It supports parent proxy,nat forward,TCP/UDP port forwarding, SSH transfer, TLS encrypted transmission, protocol conversion. you can expose a local server behind a NAT or firewall to the internet, secure DNS proxy.  
 
   
 ---  
   
-[![stable](https://img.shields.io/badge/stable-stable-green.svg)](https://github.com/snail007/goproxy/) [![license](https://img.shields.io/github/license/snail007/goproxy.svg?style=plastic)]() [![download_count](https://img.shields.io/github/downloads/snail007/goproxy/total.svg?style=plastic)](https://github.com/snail007/goproxy/releases) [![download](https://img.shields.io/github/release/snail007/goproxy.svg?style=plastic)](https://github.com/snail007/goproxy/releases)  
+[![stable](https://img.shields.io/badge/stable-stable-green.svg)](https://github.com/tangyu1018/goproxy/) [![license](https://img.shields.io/github/license/tangyu1018/goproxy.svg?style=plastic)]() [![download_count](https://img.shields.io/github/downloads/tangyu1018/goproxy/total.svg?style=plastic)](https://github.com/tangyu1018/goproxy/releases) [![download](https://img.shields.io/github/release/tangyu1018/goproxy.svg?style=plastic)](https://github.com/tangyu1018/goproxy/releases)  
   
 [中文手册](/README_ZH.md)  **[全平台GUI版本](/gui/README.md)**  **[全平台SDK](/sdk/README.md)**   
 
@@ -38,26 +38,26 @@ Proxy is a high performance HTTP, HTTPS, HTTPS, websocket, TCP, UDP, Socks5 prox
 
  
 This page is the v5.1 manual, and the other version of the manual can be checked by the following link.  
-- [v5.1 manual](https://github.com/snail007/goproxy/tree/v5.1)
-- [v4.9 manual](https://github.com/snail007/goproxy/tree/v4.9)
-- [v4.8 manual](https://github.com/snail007/goproxy/tree/v4.8)
-- [v4.7 manual](https://github.com/snail007/goproxy/tree/v4.7)
-- [v4.6 manual](https://github.com/snail007/goproxy/tree/v4.6)
-- [v4.5 manual](https://github.com/snail007/goproxy/tree/v4.5)
-- [v4.4 manual](https://github.com/snail007/goproxy/tree/v4.4)
-- [v4.3 manual](https://github.com/snail007/goproxy/tree/v4.3)
-- [v4.2 manual](https://github.com/snail007/goproxy/tree/v4.2)
-- [v4.0-4.1 manual](https://github.com/snail007/goproxy/tree/v4.1)
-- [v3.9 manual](https://github.com/snail007/goproxy/tree/v3.9)
-- [v3.8 manual](https://github.com/snail007/goproxy/tree/v3.8)
-- [v3.6-v3.7 manual](https://github.com/snail007/goproxy/tree/v3.6)
-- [v3.5 manual](https://github.com/snail007/goproxy/tree/v3.5)
-- [v3.4 manual](https://github.com/snail007/goproxy/tree/v3.4)
-- [v3.3 manual](https://github.com/snail007/goproxy/tree/v3.3)
-- [v3.2 manual](https://github.com/snail007/goproxy/tree/v3.2)
-- [v3.1 manual](https://github.com/snail007/goproxy/tree/v3.1)
-- [v3.0 manual](https://github.com/snail007/goproxy/tree/v3.0)
-- [v2.x manual](https://github.com/snail007/goproxy/tree/v2.2)  
+- [v5.1 manual](https://github.com/tangyu1018/goproxy/tree/v5.1)
+- [v4.9 manual](https://github.com/tangyu1018/goproxy/tree/v4.9)
+- [v4.8 manual](https://github.com/tangyu1018/goproxy/tree/v4.8)
+- [v4.7 manual](https://github.com/tangyu1018/goproxy/tree/v4.7)
+- [v4.6 manual](https://github.com/tangyu1018/goproxy/tree/v4.6)
+- [v4.5 manual](https://github.com/tangyu1018/goproxy/tree/v4.5)
+- [v4.4 manual](https://github.com/tangyu1018/goproxy/tree/v4.4)
+- [v4.3 manual](https://github.com/tangyu1018/goproxy/tree/v4.3)
+- [v4.2 manual](https://github.com/tangyu1018/goproxy/tree/v4.2)
+- [v4.0-4.1 manual](https://github.com/tangyu1018/goproxy/tree/v4.1)
+- [v3.9 manual](https://github.com/tangyu1018/goproxy/tree/v3.9)
+- [v3.8 manual](https://github.com/tangyu1018/goproxy/tree/v3.8)
+- [v3.6-v3.7 manual](https://github.com/tangyu1018/goproxy/tree/v3.6)
+- [v3.5 manual](https://github.com/tangyu1018/goproxy/tree/v3.5)
+- [v3.4 manual](https://github.com/tangyu1018/goproxy/tree/v3.4)
+- [v3.3 manual](https://github.com/tangyu1018/goproxy/tree/v3.3)
+- [v3.2 manual](https://github.com/tangyu1018/goproxy/tree/v3.2)
+- [v3.1 manual](https://github.com/tangyu1018/goproxy/tree/v3.1)
+- [v3.0 manual](https://github.com/tangyu1018/goproxy/tree/v3.0)
+- [v2.x manual](https://github.com/tangyu1018/goproxy/tree/v2.2)  
 
 ### How to find the organization?  
 [Click to join the proxy group of gitter](https://gitter.im/go-proxy/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link)  
@@ -159,7 +159,7 @@ tips:all operations require root permissions.
 #### Quick installation
 #### **0. If your VPS is linux64, you can complete the automatic installation and configuration by the following sentence.**  
 ```shell  
-curl -L https://raw.githubusercontent.com/snail007/goproxy/master/install_auto.sh | bash  
+curl -L https://raw.githubusercontent.com/tangyu1018/goproxy/master/install_auto.sh | bash  
 ```  
 The installation is completed, the configuration directory is /etc/proxy, more detailed use of the method referred to the following manual for further understanding.  
 If the installation fails or your VPS is not a linux64 system, please follow the semi-automatic step below:  
@@ -167,15 +167,15 @@ If the installation fails or your VPS is not a linux64 system, please follow the
 #### Manual installation 
 
 #### **1.Download proxy**  
-Download address: https://github.com/snail007/goproxy/releases  
+Download address: https://github.com/tangyu1018/goproxy/releases  
 ```shell  
 cd /root/proxy/  
-wget https://github.com/snail007/goproxy/releases/download/v5.0/proxy-linux-amd64.tar.gz  
+wget https://github.com/tangyu1018/goproxy/releases/download/v5.0/proxy-linux-amd64.tar.gz  
 ```  
 #### **2.Download the automatic installation script**  
 ```shell  
 cd /root/proxy/  
-wget https://raw.githubusercontent.com/snail007/goproxy/master/install.sh  
+wget https://raw.githubusercontent.com/tangyu1018/goproxy/master/install.sh  
 chmod +x install.sh  
 ./install.sh  
 ```  
@@ -1090,9 +1090,9 @@ PR needs to explain what changes have been made and why you change them.
 
 ### How to use the source code?    
 Recommend go1.10.1.   
-`go get github.com/snail007/goproxy`   
+`go get github.com/tangyu1018/goproxy`   
 use command cd to enter your go SRC directory   
-then cd to enter `github.com/snail007/goproxy`.    
+then cd to enter `github.com/tangyu1018/goproxy`.    
 Direct compilation:`go build -o proxy`        
 execution: `go run *.go`       
 `utils` is a toolkit, and `service` is a specific service class.  
@@ -1105,10 +1105,10 @@ proxy QQ group:189618940
 ### Donation  
 if proxy help you a lot,you can support us by:  
 ### AliPay   
-<img src="https://github.com/snail007/goproxy/blob/master/docs/images/alipay.jpg?raw=true" width="200"/>  
+<img src="https://github.com/tangyu1018/goproxy/blob/master/docs/images/alipay.jpg?raw=true" width="200"/>  
   
 ### Wechat Pay  
-<img src="https://github.com/snail007/goproxy/blob/master/docs/images/wxpay.jpg?raw=true" width="200"/>  
+<img src="https://github.com/tangyu1018/goproxy/blob/master/docs/images/wxpay.jpg?raw=true" width="200"/>  
 
   
   

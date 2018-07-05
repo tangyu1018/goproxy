@@ -6,7 +6,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/snail007/goproxy/services"
+	"github.com/tangyu1018/goproxy/services"
 )
 
 const APP_VERSION = "5.1"

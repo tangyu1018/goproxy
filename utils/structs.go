@@ -16,8 +16,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/snail007/goproxy/services/kcpcfg"
-	"github.com/snail007/goproxy/utils/sni"
+	"github.com/tangyu1018/goproxy/services/kcpcfg"
+	"github.com/tangyu1018/goproxy/utils/sni"
 
 	"github.com/golang/snappy"
 	"github.com/miekg/dns"
@@ -27,6 +27,7 @@ type Checker struct {
 	data       ConcurrentMap
 	blockedMap ConcurrentMap
 	directMap  ConcurrentMap
+	banedMap   ConcurrentMap
 	interval   int64
 	timeout    int
 	isStop     bool
@@ -47,7 +48,7 @@ type CheckerItem struct {
 //NewChecker args:
 //timeout : tcp timeout milliseconds ,connect to host
 //interval: recheck domain interval seconds
-func NewChecker(timeout int, interval int64, blockedFile, directFile string, log *logger.Logger) Checker {
+func NewChecker(timeout int, interval int64, blockedFile, directFile, banedFile string, log *logger.Logger) Checker {
 	ch := Checker{
 		data:     NewConcurrentMap(),
 		interval: interval,
@@ -57,11 +58,16 @@ func NewChecker(timeout int, interval int64, blockedFile, directFile string, log
 	}
 	ch.blockedMap = ch.loadMap(blockedFile)
 	ch.directMap = ch.loadMap(directFile)
+	ch.banedMap = ch.loadMap(banedFile)
+
 	if !ch.blockedMap.IsEmpty() {
 		log.Printf("blocked file loaded , domains : %d", ch.blockedMap.Count())
 	}
 	if !ch.directMap.IsEmpty() {
 		log.Printf("direct file loaded , domains : %d", ch.directMap.Count())
+	}
+	if !ch.banedMap.IsEmpty() {
+		log.Printf("baned file loaded , domains : %d", ch.banedMap.Count())
 	}
 	if interval > 0 {
 		ch.start()
@@ -132,6 +138,15 @@ func (c *Checker) isNeedCheck(item CheckerItem) bool {
 	}
 	return true
 }
+
+func (c *Checker) IsBaned(address string) (baned bool) {
+	if c.domainIsInBanedMap(address) {
+		//log.Printf("%s in blocked ? true", address)
+		return true
+	}
+	return false
+}
+
 func (c *Checker) IsBlocked(address string) (blocked bool, failN, successN uint) {
 	if c.domainIsInMap(address, true) {
 		//log.Printf("%s in blocked ? true", address)
@@ -150,6 +165,26 @@ func (c *Checker) IsBlocked(address string) (blocked bool, failN, successN uint)
 	item := _item.(CheckerItem)
 
 	return item.FailCount >= item.SuccessCount, item.FailCount, item.SuccessCount
+}
+func (c *Checker) domainIsInBanedMap(address string) bool {
+	u, err := url.Parse("http://" + address)
+	if err != nil {
+		c.log.Printf("blocked check , url parse err:%s", err)
+		return true
+	}
+	domainSlice := strings.Split(u.Hostname(), ".")
+	if len(domainSlice) > 1 {
+		subSlice := domainSlice[:len(domainSlice)-1]
+		topDomain := strings.Join(domainSlice[len(domainSlice)-1:], ".")
+		checkDomain := topDomain
+		for i := len(subSlice) - 1; i >= 0; i-- {
+			checkDomain = subSlice[i] + "." + checkDomain
+			if c.banedMap.Has(checkDomain) {
+				return true
+			}
+		}
+	}
+	return false
 }
 func (c *Checker) domainIsInMap(address string, blockedMap bool) bool {
 	u, err := url.Parse("http://" + address)

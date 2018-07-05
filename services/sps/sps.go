@@ -13,11 +13,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/snail007/goproxy/services"
-	"github.com/snail007/goproxy/services/kcpcfg"
-	"github.com/snail007/goproxy/utils"
-	"github.com/snail007/goproxy/utils/conncrypt"
-	"github.com/snail007/goproxy/utils/socks"
+	"github.com/tangyu1018/goproxy/services"
+	"github.com/tangyu1018/goproxy/services/kcpcfg"
+	"github.com/tangyu1018/goproxy/utils"
+	"github.com/tangyu1018/goproxy/utils/conncrypt"
+	"github.com/tangyu1018/goproxy/utils/socks"
 )
 
 type SPSArgs struct {
